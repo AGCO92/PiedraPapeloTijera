@@ -1,23 +1,33 @@
+let computerSelection = computerPlays();
 let playerSelection;
-
-function computerPlays() {
-    let computerSelection = Math.random(); 
-    if (computerSelection < 0.33) {
-        return 'Rock';
-    } else if (computerSelection >= 0.33 && computerSelection < 0.66) {
-        return 'Paper';
-    } else {
-        return 'Scissors'
-    }
-}
+let win = `You Win! ${playerSelection} beats ${computerSelection}`
+let lose = `You Lose! ${computerSelection} beats ${playerSelection}`
+let tie = `It's a tie`
 
 playerSelection = prompt("What do you choose?", "");
 playerSelection = playerSelection.toLowerCase();
 
-function playRound (computerSelection, playerSelection) {
-    /*devuelve quien es el ganador "You Lose! Paper beats Rock"*/
+function computerPlays() {
+    let choose = Math.random(); 
+    if (choose < 0.33) {
+        return 'rock';
+    } else if (choose >= 0.33 && choose < 0.66) {
+        return 'paper';
+    } else {
+        return 'scissors'
+    }
 }
 
-function game (playRound, 5) {
+function playRound (playerSelection, computerSelection) {
+    if (computerSelection === playerSelection) {
+        return tie;
+    } else if (playerSelection === "rock" && computerSelection === "scissors" || playerSelection === "scissors" && computerSelection === "paper" || playerSelection === "paper" && computerSelection === "rock") {
+        return win;
+    } else {
+        return lose;
+    }
+}
+ 
+function game (playRound, x) {
     /*arroja el resultado de quien gana*/
 }
