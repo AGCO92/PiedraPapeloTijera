@@ -5,10 +5,74 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Piedra, Papel o Tijera</title>
-    <script type="text/javascript" src="./js.js">
-    </script>
+    
 </head>
 <body>
+    <script>
+        
+let win;
+let lose;
+let tie;
 
+
+function playRound (playerSelection, computerSelection) {    
+    win = `You Win! ${playerSelection} beats ${computerSelection}`;
+    lose = `You Lose! ${computerSelection} beats ${playerSelection};`
+    tie = `It's a tie`;
+    if (computerSelection === playerSelection) {
+        return tie;
+    } else if (playerSelection === "rock" && computerSelection === "scissors" || playerSelection === "scissors" && computerSelection === "paper" || playerSelection === "paper" && computerSelection === "rock") {
+        return win;
+    } else {
+        return lose;
+    }
+}
+
+function computerPlays() {
+    let choose = Math.random(); 
+    if (choose < 0.33) {
+        return 'rock';
+    } else if (choose >= 0.33 && choose < 0.66) {
+        return 'paper';
+    } else {
+        return 'scissors'
+    }
+}
+
+function playerPlays() {
+    return prompt("What do you choose?", "").toLowerCase();
+}
+
+function logIt(resultado) {
+    alert(resultado)
+}
+
+
+function game (playerPlays, computerPlays, playRound, logIt) {
+    let playerCount = 0;
+    let computerCount = 0;
+    for(let i = 0; i < 5; i++){
+        let playerSelection = playerPlays();
+        let computerSelection = computerPlays();
+        let result = playRound(playerSelection, computerSelection);
+        logIt(result)
+        if (result === win) {
+            playerCount++;
+        } else if (result === lose) {
+            computerCount++;
+        }
+    }
+    if (playerCount > computerCount){
+        logIt(`Congratulations, you win. Final score: You ${playerCount}, Computer: ${computerCount}`);
+    } else if (playerCount < computerCount) {
+        logIt(`Sorry, you lose. Final score: You ${playerCount}, Computer: ${computerCount}`);
+    } else {
+        logIt(`Its a tie. Final score: You ${playerCount}, Computer: ${computerCount}`);
+    }
+}
+
+game (playerPlays, computerPlays, playRound, logIt)
+
+    </script>
 </body>
 </html>
